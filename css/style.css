@@ -1,0 +1,21 @@
+header{
+	text-align: center;
+	font-weight: bold;
+}
+
+footer{
+	text-align: center;
+	font-style: italic;
+}
+
+ul{
+	background-color: #d2d2d2;
+	list-style-type: none;
+	overflow: hidden;
+}
+li{
+	float:left;
+	padding: 14px 16px;
+}
+
+
