@@ -1,12 +1,28 @@
 <?php
 include('connect.php');
-$sql = "SELECT * FROM user";
-$stmt = $conn->prepare($sql);
-$query = $stmt->execute();
-$result = array();
-if($query){
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$result[] = $row;
+if(empty($_POST['submit'])){
+	$sql = "SELECT * FROM user";
+	$stmt = $conn->prepare($sql);
+	$query = $stmt->execute();
+	$result = array();
+	if($query){
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$result[] = $row;
+		}
+	}
+}
+else{
+	if(isset($_POST['timkiem'])){
+		$timkiem = $_POST['timkiem'];
+		$sql = "SELECT * FROM user WHERE hoten LIKE '%$timkiem%'";
+		$stmt = $conn->prepare($sql);
+		$query = $stmt->execute();
+		$result = array();
+		if($query){
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$result[] = $row;
+			}
+		}
 	}
 }
 
@@ -27,8 +43,12 @@ if($query){
 		<ul>
 			<li><a href="index.php">TRANG CHỦ</a></li>
 			<li><a href="addsv.php">THÊM SINH VIÊN</a></li>
-			<li><a href="search.php">TÌM KIẾM</a></li>
 		</ul>
+		<form method="post">
+			<label>TÌM KIẾM</label>
+			<input type="text" name="timkiem" placeholder="Nhập tên để tìm kiếm !">
+			<input type="submit" name="submit" value="TÌM KIẾM">
+		</form>
 		<table class="table table-inverse">
 			<thead>
 				<tr>
